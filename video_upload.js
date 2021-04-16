@@ -75,6 +75,7 @@ function upload (req, callback) {
     // Generate path where the file will be saved.
     var appDir = path.dirname(require.main.filename);
     saveToPath = path.join(appDir, link);
+    console.log("Saved path " + saveToPath);
 
     // Pipe reader stream (file from client) into writer stream (file from disk).
     file.on("error", handleStreamError);
@@ -87,6 +88,7 @@ function upload (req, callback) {
     diskWriterStream.on("finish", function() {
       // Check if file is valid
       var status = isFileValid(saveToPath, mimetype);
+      console.log("File valid " + status);
 
       if (!status) {
        return handleStreamError("File does not meet the validation.");
