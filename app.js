@@ -9,13 +9,10 @@ var upload_video = require("./video_upload.js");
 app.use(express.static(__dirname + "/"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", function(req, res) {
-  res.sendFile(__dirname + "/index.html");
-});
-
 // Video POST handler.
 app.post("/video_upload", function (req, res) {
   upload_video(req, function(err, data) {
+    console.log("upload video handler called");
 
     if (err) {
       return res.status(404).end(JSON.stringify(err));
